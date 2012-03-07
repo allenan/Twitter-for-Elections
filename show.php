@@ -13,13 +13,13 @@ ini_set('display_errors', '1');
 	
 	
 	//possible queries..
-	$allText = "SELECT text FROM nlp";
+	$allText = "SELECT text FROM nlp2";
 	$allMichigan = "SELECT text FROM nlp WHERE state = 'MI'";
 	$voteQuery = "SELECT text FROM nlp WHERE text LIKE '%#primaries%' ";
 	
 	
 	//function to perform the search
-	query($voteQuery);
+	query($allText);
 	
 	
 	

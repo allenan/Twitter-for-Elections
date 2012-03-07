@@ -15,7 +15,7 @@ include 'api.php';
 	$opts = array(
 		'http'=>array(
 			'method' => "POST",
-			'content' => 'locations=-170.5957,18.7763,-66.8850749,71.5388',
+			'content' => 'track=vote, voting, primary, primaries, GOP, republican, romney, newt, santorum,ron paul,romney2012,Gingrich, supertuesday, supertues',
                         'header' => "Content-Type: application/x-www-form-urlencoded\r\n"  )
 		);
       
@@ -39,25 +39,25 @@ include 'api.php';
 			else{
 				$tweet = json_decode($line);
 				
-				$lat = ( ($tweet->{'place'}->{'bounding_box'}->{'coordinates'}[0][0][1]) );
-				$lng = ( ($tweet->{'place'}->{'bounding_box'}->{'coordinates'}[0][0][0])); //take the smallest longtitude
+				//$lat = ( ($tweet->{'place'}->{'bounding_box'}->{'coordinates'}[0][0][1]) );
+				//$lng = ( ($tweet->{'place'}->{'bounding_box'}->{'coordinates'}[0][0][0])); //take the smallest longtitude
 				
-				$latlng = $lat ."," .$lng;
+				//$latlng = $lat ."," .$lng;
 				
-				$state = Bing($latlng); //lookup($latlng);
+				//$state = Bing($latlng); //lookup($latlng);
 				 
-				 if (in_array($state, $list)) {
+				 //if (in_array($state, $list)) {
 						$id = mysql_real_escape_string($tweet->{'id'});
 						$text = mysql_real_escape_string($tweet->{'text'});
 						$user = mysql_real_escape_string($tweet->{'user'}->{'screen_name'});
 						
-						$lat = mysql_real_escape_string($lat);
-						$lng = mysql_real_escape_string($lng);
+						//$lat = mysql_real_escape_string($lat);
+						//$lng = mysql_real_escape_string($lng);
 						
-						$query = mysql_query("INSERT INTO nlp (id, text, user, date, state, lat, lng) VALUES ('$id', '$text', '$user', NOW(), '$state', '$lat', '$lng' )");
+						$query = mysql_query("INSERT INTO nlp2 (id, text, user, date) VALUES ('$id', '$text', '$user', NOW() )");
 						if (!$query) {echo "Mysql Error: ".mysql_error();}
 						
-				} //if the tweet inside the U.S*/
+				//} //if the tweet inside the U.S*/
 				
 				flush();
 			
