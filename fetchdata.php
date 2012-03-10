@@ -1,6 +1,5 @@
-
 <?php
-//
+header('Content-type: application/json');
 $link = mysql_connect('localhost', 'nonagon_twitter', 'Twitter321!');
 if (!$link) {
     die('Could not connect: ' . mysql_error());
@@ -10,7 +9,7 @@ $romney = mysql_query('SELECT count(*) as count FROM `tracked` WHERE `text` like
 if (!$romney) {
     die('Invalid query: ' . mysql_error());
 }
-$santorum = mysql_query('SELECT count(*) as count FROM `tracked` WHERE `text` like "%santorm%"');
+$santorum = mysql_query('SELECT count(*) as count FROM `tracked` WHERE `text` like "%santorum%"');
 if (!$santorum) {
     die('Invalid query: ' . mysql_error());
 }
@@ -22,14 +21,31 @@ $paul = mysql_query('SELECT count(*) as count FROM `tracked` WHERE `text` like "
 if (!$paul) {
     die('Invalid query: ' . mysql_error());
 }
+$data = array();
+if(mysql_num_rows($romney)) {
+    while($r = mysql_fetch_assoc($romney)) {
+       	 $data[0]['name'] = 'romney';
+	 $data[0]['count'] = $r['count'];
+    }
+}
+if(mysql_num_rows($santorum)) {
+    while($r = mysql_fetch_assoc($santorum)) {
+         $data[1]['name'] = 'santorum';
+         $data[1]['count'] = $r['count'];
+    }
+}
+if(mysql_num_rows($gingrich)) {
+    while($r = mysql_fetch_assoc($gingrich)) {
+         $data[2]['name'] = 'gingrich';
+         $data[2]['count'] = $r['count'];
+    }
+}
+if(mysql_num_rows($paul)) {
+    while($r = mysql_fetch_assoc($paul)) {
+         $data[3]['name'] = 'paul';
+         $data[3]['count'] = $r['count'];
+    }
+}
 
-die(print_r($romney));
-
-
-
-
-
-
-header('Content-type: application/json');
-//echo json_encode(array('markers'=>$results));
+echo json_encode(array('data'=>$data));
 ?>
