@@ -23,7 +23,7 @@ if (!$paul) {
     die('Invalid query: ' . mysql_error());
 }
 
-die(print_r($romney));`
+die(print_r($romney));
 
 
 
@@ -31,5 +31,5 @@ die(print_r($romney));`
 
 
 header('Content-type: application/json');
-echo json_encode(array('markers'=>$results));
+//echo json_encode(array('markers'=>$results));
 ?>
