@@ -5,6 +5,7 @@ $link = mysql_connect('localhost', 'nonagon_twitter', 'Twitter321!');
 if (!$link) {
     die('Could not connect: ' . mysql_error());
 }
+mysql_select_db('nonagon_twitter-votes',$link) or die('Cannot select the DB');
 $romney = mysql_query('SELECT count(*) as count FROM `tracked` WHERE `text` like "%romney%"');
 if (!$romney) {
     die('Invalid query: ' . mysql_error());
@@ -22,7 +23,7 @@ if (!$paul) {
     die('Invalid query: ' . mysql_error());
 }
 
-die(print_r($romney));
+die(print_r($romney));`
 
 
 
