@@ -98,27 +98,19 @@ if(mysql_num_rows($query)) {
             <h1 style="text-align:center">problems at the polls</h1><br/>
           </div>
           <div class="well">
-          <div class="row-fluid" name="voter_reports">
-            <div class="span2">
-              <img class="thumbnail" src="http://placehold.it/60x60">
-            </div>
-            <div class="span10">
-              <h5>Edmund_Robert</h5>
-              <h6>2012-03-05 10:14:11</h6>
-              <p>Ron Paul at University of Kansas Town Hall  http://t.co/HZh6QEdU</p>
-            </div>
-          </div><!--/row-->
-          <hr/>
-          <div class="row-fluid" name="voter_reports">
-            <div class="span2">
-              <img class="thumbnail" src="http://placehold.it/60x60">
-            </div>
-            <div class="span10">
-              <h5>Edmund_Robert</h5>
-              <h6>2012-03-05 10:14:11</h6>
-              <p>Ron Paul at University of Kansas Town Hall  http://t.co/HZh6QEdU</p>
-            </div>
-          </div><!--/row-->
+            <?php foreach ($data as $tweet): ?>
+              <div class="row-fluid" name="voter_reports">
+                <div class="span2">
+                  <img class="thumbnail" src="http://placehold.it/60x60">
+                </div>
+                <div class="span10">
+                  <h5><?php echo $tweet['user'] ?></h5>
+                  <h6><?php echo $tweet['date'] ?></h6>
+                  <p><?php echo $tweet['text'] ?></p>
+                </div>
+              </div><!--/row-->
+              <hr/>
+            <?php endforeach; ?>
         </div>
         </div><!--/span-->
       </div><!--/row-->
