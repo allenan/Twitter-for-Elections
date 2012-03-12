@@ -8,13 +8,14 @@ $query = mysql_query('SELECT * FROM `tracked` LIMIT 10');
 if (!$query) {
     die('Invalid query: ' . mysql_error());
 }
+die(print_r($query));
 $data = array();
 if(mysql_num_rows($query)) {
     while($r = mysql_fetch_assoc($query)) {
          $data[0] = $r;
     }
 }
-die(print_r($data));
+
 ?>
 <!DOCTYPE html>
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
