@@ -1,3 +1,21 @@
+<?php
+$link = mysql_connect('localhost', 'nonagon_twitter', 'Twitter321!');
+if (!$link) {
+    die('Could not connect: ' . mysql_error());
+}
+mysql_select_db('nonagon_twitter-votes',$link) or die('Cannot select the DB');
+$query = mysql_query('SELECT * FROM `tracked` LIMIT 10');
+if (!$query) {
+    die('Invalid query: ' . mysql_error());
+}
+$data = array();
+if(mysql_num_rows($query)) {
+    while($r = mysql_fetch_assoc($query)) {
+         $data[0] = $r;
+    }
+}
+die(print_r($data));
+?>
 <!DOCTYPE html>
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
@@ -77,8 +95,29 @@
           <div>
             <h1 style="text-align:center">problems at the polls</h1><br/>
           </div>
+          <div class="well">
           <div class="row-fluid" name="voter_reports">
+            <div class="span2">
+              <img class="thumbnail" src="http://placehold.it/60x60">
+            </div>
+            <div class="span10">
+              <h5>Edmund_Robert</h5>
+              <h6>2012-03-05 10:14:11</h6>
+              <p>Ron Paul at University of Kansas Town Hall  http://t.co/HZh6QEdU</p>
+            </div>
           </div><!--/row-->
+          <hr/>
+          <div class="row-fluid" name="voter_reports">
+            <div class="span2">
+              <img class="thumbnail" src="http://placehold.it/60x60">
+            </div>
+            <div class="span10">
+              <h5>Edmund_Robert</h5>
+              <h6>2012-03-05 10:14:11</h6>
+              <p>Ron Paul at University of Kansas Town Hall  http://t.co/HZh6QEdU</p>
+            </div>
+          </div><!--/row-->
+        </div>
         </div><!--/span-->
       </div><!--/row-->
 
@@ -90,22 +129,7 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="./Bootstrap, from Twitter_files/jquery.js"></script>
-    <script src="./Bootstrap, from Twitter_files/bootstrap-transition.js"></script>
-    <script src="./Bootstrap, from Twitter_files/bootstrap-alert.js"></script>
-    <script src="./Bootstrap, from Twitter_files/bootstrap-modal.js"></script>
-    <script src="./Bootstrap, from Twitter_files/bootstrap-dropdown.js"></script>
-    <script src="./Bootstrap, from Twitter_files/bootstrap-scrollspy.js"></script>
-    <script src="./Bootstrap, from Twitter_files/bootstrap-tab.js"></script>
-    <script src="./Bootstrap, from Twitter_files/bootstrap-tooltip.js"></script>
-    <script src="./Bootstrap, from Twitter_files/bootstrap-popover.js"></script>
-    <script src="./Bootstrap, from Twitter_files/bootstrap-button.js"></script>
-    <script src="./Bootstrap, from Twitter_files/bootstrap-collapse.js"></script>
-    <script src="./Bootstrap, from Twitter_files/bootstrap-carousel.js"></script>
-    <script src="./Bootstrap, from Twitter_files/bootstrap-typeahead.js"></script>
-    <link type="text/css" href="css/themename/jquery-ui-1.8.18.custom.css" rel="Stylesheet" />	
-    <script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
-    <script type="text/javascript" src="js/jquery-ui-1.8.18.custom.min.js"></script>
+
 
   
 
