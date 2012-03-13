@@ -1,10 +1,15 @@
 <?php
+
+//$candidate = "Romney";
+$candidate = $_GET['candidate'];
+
 $link = mysql_connect('localhost', 'root', 'whosthat');
 if (!$link) {
     die('Could not connect: ' . mysql_error());
 }
 mysql_select_db('twitter',$link) or die('Cannot select the DB');
-$query = mysql_query('SELECT * FROM `nlp2` LIMIT 10');
+
+$query = mysql_query('SELECT * FROM `nlp2` WHERE text LIKE "%' . $candidate. '%" LIMIT 30');
 if (!$query) {
     die('Invalid query: ' . mysql_error());
 }
@@ -80,7 +85,7 @@ if(mysql_num_rows($query)) {
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">Tweets by Candidate</li>
-             <li><a href="candidate.php?candidate=Ron Paul" onclick="">Ron Paul</a></li>
+              <li><a href="candidate.php?candidate=Ron Paul" onclick="">Ron Paul</a></li>
               <li><a href="candidate.php?candidate=Romney" onclick="">Mitt Romney</a></li>
               <li><a href="candidate.php?candidate=Gingrich" onclick="">Newt Gingrich</a></li>
               <li><a href="candidate.php?candidate=Santorum" onclick="">Rick Santorum</a></li>
@@ -89,7 +94,7 @@ if(mysql_num_rows($query)) {
         </div><!--/span-->
         <div class="span9">
           <div>
-            <h1 style="text-align:center">problems at the polls</h1><br/>
+            <h1 style="text-align:center">Tweets for <?php echo $candidate ?></h1><br/>
           </div>
           <div class="well">
             <?php foreach ($data as $tweet): ?>
@@ -122,3 +127,7 @@ if(mysql_num_rows($query)) {
   
 
 </body></html>
+
+
+
+?>

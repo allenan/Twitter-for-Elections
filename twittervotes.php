@@ -1,10 +1,10 @@
 <?php
-$link = mysql_connect('localhost', 'nonagon_twitter', 'Twitter321!');
+$link = mysql_connect('localhost', 'root', 'whosthat');
 if (!$link) {
     die('Could not connect: ' . mysql_error());
 }
-mysql_select_db('nonagon_twitter-votes',$link) or die('Cannot select the DB');
-$query = mysql_query('SELECT * FROM tracked where text like "% voted %" AND (text LIKE "%Romney%" or text LIKE "%Santorum%" or text LIKE "%Gingrich%" or text LIKE "%Ron Paul%")');
+mysql_select_db('twitter',$link) or die('Cannot select the DB');
+$query = mysql_query('SELECT * FROM nlp2 where text like "% voted %" AND (text LIKE "%Romney%" or text LIKE "%Santorum%" or text LIKE "%Gingrich%" or text LIKE "%Ron Paul%")');
 if (!$query) {
     die('Invalid query: ' . mysql_error());
 }
@@ -67,11 +67,11 @@ if(mysql_num_rows($query)) {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="twittervotes.html">Super Tuesday</a>
+          <a class="brand" href="twittervotes.php">Super Tuesday</a>
             <div class="nav-collapse">
               <ul class="nav">
-                <li class="active"><a href="twittervotes.html">Voter Reports</a></li>
-                <li><a href="problem-reports.html">Problem Reports</a></li>
+                <li class="active"><a href="twittervotes.php">Voter Reports</a></li>
+                <li><a href="problem-reports.php">Problem Reports</a></li>
                 <li><a href="map-reports.html">Map</a></li>
               </ul>
             </div><!--/.nav-collapse -->
@@ -86,10 +86,10 @@ if(mysql_num_rows($query)) {
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">Tweets by Candidate</li>
-              <li><a href="#" onclick="">Ron Paul</a></li>
-              <li><a href="#" onclick="">Mitt Romney</a></li>
-              <li><a href="#" onclick="">Newt Gingrich</a></li>
-              <li><a href="#" onclick="">Rick Santorum</a></li>
+              <li><a href="candidate.php?candidate=Ron Paul" onclick="">Ron Paul</a></li>
+              <li><a href="candidate.php?candidate=Romney" onclick="">Mitt Romney</a></li>
+              <li><a href="candidate.php?candidate=Gingrich" onclick="">Newt Gingrich</a></li>
+              <li><a href="candidate.php?candidate=Santorum" onclick="">Rick Santorum</a></li>
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
