@@ -96,25 +96,29 @@
           <script type="text/javascript">
                 $(function(){
             	    var css_selector = "#placeholder";
-                  	//dummy data
-                  	var data=[{data:[[1,300],[2, 800], [3, 500], [4, 1300]]}];
                   	var options = {
         				series: {stack: 0,
         					color: 'red',
                 			lines: {show: false, steps: false },
                				bars: {show: true, barWidth: 0.9, align: 'center',},},
-		       				xaxis: {ticks: [[1,'Ron Paul'], [2,'Mitt Romney'], [3,'Newt Gingrich'], [4,'Rick Santorum']]},
+		       				xaxis: {ticks: [[1,'Mitt Romney'], [2,'Rick Santorum'], [3,'Newt Gingrich'], [4,'Ron Paul']]},
     				};
                 	var dataurl="fetchdata.php";    
-                  	var data=$.ajax({
+                  	var raw_data=$.ajax({
                       url: dataurl,
                       method: 'GET',
                       dataType: 'json',
                       success: console.log(data)
                   	})['data'];
 
+					var data=[]
+					for (var i in raw_data){
+						data.push([(i + 1), parseInt(raw_data[i]['count'])]);
+					}
+
                   $.plot($(css_selector), data, options)
               });
+              
           </script>
       </div><!--/row-->
 
