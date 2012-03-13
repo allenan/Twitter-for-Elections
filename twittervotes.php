@@ -98,7 +98,7 @@ if(mysql_num_rows($query)) {
             <h1 style="text-align:center">voter reports</h1><br/>
           </div>
           <div class="row-fluid" id="voter_reports">
-          <div class="span6" id="tweets">
+          <div class="span7" id="tweets">
             <div class="well">
             <?php foreach ($data as $tweet): ?>
               <div class="row-fluid" name="voter_reports">
