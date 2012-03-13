@@ -103,7 +103,7 @@
                				bars: {show: true, barWidth: 0.9, align: 'center',},},
 		       				xaxis: {ticks: [[1,'Mitt Romney'], [2,'Rick Santorum'], [3,'Newt Gingrich'], [4,'Ron Paul']]},
     				};
-                	var dataurl="fetchdata.php";    
+                	var dataurl="fetchdata.php";   
                   	/*var raw_data=$.ajax({
                       url: dataurl,
                       method: 'GET',
@@ -111,9 +111,9 @@
                       success: function(){for (var i in raw_data){data.push([(i + 1), parseInt(raw_data[i]['count'])]);}}
                   	})['data'];*/
 
-					var data = $.getJSON(dataurl, console.log(data));
+					var data=[{data:[[1,804],[2, 703], [3, 1869], [4, 1441]]}];
 
-                  $.plot($(css_selector), data, options)
+                  	$.plot($(css_selector), data, options)
               });
               
           </script>
