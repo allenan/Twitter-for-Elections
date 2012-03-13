@@ -104,17 +104,13 @@
 		       				xaxis: {ticks: [[1,'Mitt Romney'], [2,'Rick Santorum'], [3,'Newt Gingrich'], [4,'Ron Paul']]},
     				};
                 	var dataurl="fetchdata.php";    
+					var data=[];
                   	var raw_data=$.ajax({
                       url: dataurl,
                       method: 'GET',
                       dataType: 'json',
-                      success: console.log(data)
+                      success: function(){for (var i in raw_data){data.push([(i + 1), parseInt(raw_data[i]['count'])]);}}
                   	})['data'];
-
-					var data=[]
-					for (var i in raw_data){
-						data.push([(i + 1), parseInt(raw_data[i]['count'])]);
-					}
 
                   $.plot($(css_selector), data, options)
               });
