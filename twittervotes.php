@@ -98,7 +98,7 @@ if(mysql_num_rows($query)) {
             <h1 style="text-align:center">voter reports</h1><br/>
           </div>
           <div class="row-fluid" id="voter_reports">
-          <div class="span4" id="tweets">
+          <div class="span6" id="tweets">
             <div class="well">
             <?php foreach ($data as $tweet): ?>
               <div class="row-fluid" name="voter_reports">
@@ -116,7 +116,7 @@ if(mysql_num_rows($query)) {
         </div>
           	<p><a class="btn" href="#" onclick="">More Tweets</a></p>
           </div>
-          <div id="placeholder" style="float: right; width: 484px; height: 300px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; position: relative; "></div>
+          <div id="placeholder" style="float: right; width: 300px; height: 300px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; position: relative; "></div>
         </div><!--/row-->
         </div><!--/span-->
           <script type="text/javascript">
