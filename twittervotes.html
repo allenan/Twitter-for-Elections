@@ -105,12 +105,12 @@
           		<li><h2>Newt the Grinch, ugh lulz tweet @tripleJay #GOP</h2><li>
           		<li><h2>So a mormon, a serial adulterer, a psychopath, and a theocrat walk into a bar...</h2></li>
           	</ul>
-          	<p><a class="btn" href="#" onclick="moreTweets()">More Tweets</a></p>
+          	<p><a class="btn" href="#" onclick="">More Tweets</a></p>
           </div>
           <div id="placeholder" style="float: right; width: 484px; height: 300px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; position: relative; "></div>
         </div><!--/row-->
         </div><!--/span-->
-          <script type="text/javascript">              
+          <script type="text/javascript">
                 $(function(){
             	    var css_selector = "#placeholder";
                   	//dummy data
@@ -123,12 +123,12 @@
 		       				xaxis: {ticks: [[1,'Ron Paul'], [2,'Mitt Romney'], [3,'Newt Gingrich'], [4,'Rick Santorum']]},
     				};
                 	var dataurl="fetchdata.php";    
-                  	/*var data=$.ajax({
+                  	var data=$.ajax({
                       url: dataurl,
                       method: 'GET',
                       dataType: 'json',
-                      success: onDataReceived
-                  	})['data'];*/
+                      success: console.log(data)
+                  	})['data'];
 
                   $.plot($(css_selector), data, options)
               });
