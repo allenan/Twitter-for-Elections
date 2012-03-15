@@ -136,7 +136,7 @@ if(mysql_num_rows($query)) {
 		       			    xaxis: {ticks: [[1,'Mitt Romney'], [2,'Rick Santorum'], [3,'Newt Gingrich'], [4,'Ron Paul']]},
     				      };
 
-                  $.getJSON('get_data_timeline.php?', {},  
+                  $.getJSON('fetchdata.php', {},  
                     function(data) {
                       var index = 1;
                       $.each(data, function(i, s) {
