@@ -3014,3 +3014,5 @@
 [12-Mar-2012 00:18:58] PHP Warning:  feof(): supplied argument is not a valid stream resource in /home/nonagon/public_html/Twitter-for-Elections/stream.php on line 32
 [12-Mar-2012 00:18:58] PHP Warning:  stream_get_line() expects parameter 1 to be resource, boolean given in /home/nonagon/public_html/Twitter-for-Elections/stream.php on line 34
 [12-Mar-2012 00:18:58] PHP Warning:  feof(): supplied argument is not a valid stream resource in /home/nonagon/public_html/Twitter-for-Elections/stream.php on line 32
+[13-Mar-2012 15:48:36] PHP Warning:  mysql_connect() [<a href='function.mysql-connect'>function.mysql-connect</a>]: Access denied for user 'root'@'localhost' (using password: YES) in /home/nonagon/public_html/Twitter-for-Elections/problem-reports.php on line 2
+[13-Mar-2012 15:49:57] PHP Warning:  mysql_connect() [<a href='function.mysql-connect'>function.mysql-connect</a>]: Access denied for user 'nonagon_twitter-'@'localhost' (using password: YES) in /home/nonagon/public_html/Twitter-for-Elections/twittervotes.php on line 2

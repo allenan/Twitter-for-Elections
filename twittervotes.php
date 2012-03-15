@@ -1,9 +1,9 @@
 <?php
-$link = mysql_connect('localhost', 'root', 'whosthat');
+$link = mysql_connect('localhost', 'nonagon_twitter', 'Twitter321!');
 if (!$link) {
     die('Could not connect: ' . mysql_error());
 }
-mysql_select_db('twitter',$link) or die('Cannot select the DB');
+mysql_select_db('nonagon_twitter-votes',$link) or die('Cannot select the DB');
 $query = mysql_query('SELECT * FROM nlp2 where text like "% voted %" AND (text LIKE "%Romney%" or text LIKE "%Santorum%" or text LIKE "%Gingrich%" or text LIKE "%Ron Paul%")');
 if (!$query) {
     die('Invalid query: ' . mysql_error());
