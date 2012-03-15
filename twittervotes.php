@@ -123,15 +123,30 @@ if(mysql_num_rows($query)) {
         </div><!--/span-->
           <script type="text/javascript">
                 $(function(){
+                  d = [{data:[]}];
             	    var css_selector = "#placeholder";
-                  	var options = {
-        				series: {stack: 0,
-        					color: 'red',
-                			lines: {show: false, steps: false },
-               				bars: {show: true, barWidth: 0.9, align: 'center',},},
-		       				xaxis: {ticks: [[1,'Mitt Romney'], [2,'Rick Santorum'], [3,'Newt Gingrich'], [4,'Ron Paul']]},
-    				};
-                	var dataurl="fetchdata.php";   
+                  var dataurl="fetchdata.php";
+                  var options = {
+        				    series: {
+                      stack: 0,
+                      color: 'red',
+                		  lines: {show: false, steps: false },
+               			  bars: {show: true, barWidth: 0.9, align: 'center',},
+                    },
+		       			    xaxis: {ticks: [[1,'Mitt Romney'], [2,'Rick Santorum'], [3,'Newt Gingrich'], [4,'Ron Paul']]},
+    				      };
+
+                  $.getJSON('get_data_timeline.php?', {},  
+                    function(data) {
+                      var index = 1;
+                      $.each(data, function(i, s) {
+                        d.data.push(
+                          [index,data.count]
+                        );
+                        index += 1;
+                        //console.log(s);
+                      });
+                	   
                   	/*var raw_data=$.ajax({
                       url: dataurl,
                       method: 'GET',
@@ -139,9 +154,9 @@ if(mysql_num_rows($query)) {
                       success: function(){for (var i in raw_data){data.push([(i + 1), parseInt(raw_data[i]['count'])]);}}
                   	})['data'];*/
 
-					var data=[{data:[[1,804],[2, 703], [3, 1869], [4, 1441]]}];
+                    //var data=[{data:[[1,804],[2, 703], [3, 1869], [4, 1441]]}];
 
-                  	$.plot($(css_selector), data, options)
+                  	$.plot($(css_selector), d, options)
               	});
               
           </script>
