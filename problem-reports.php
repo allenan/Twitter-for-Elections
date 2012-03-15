@@ -4,7 +4,10 @@ if (!$link) {
     die('Could not connect: ' . mysql_error());
 }
 mysql_select_db('nonagon_twitter-votes',$link) or die('Cannot select the DB');
-$query = mysql_query('SELECT * FROM `nlp2` LIMIT 10');
+$query = mysql_query('SELECT * FROM tracked WHERE 
+  (text like "% not %" and text like "%vote%" and text like "% able %") or
+  (text like "%line%" or text like "%lines%") and (text like "%long%" or text like "%short%")
+  ');
 if (!$query) {
     die('Invalid query: ' . mysql_error());
 }
