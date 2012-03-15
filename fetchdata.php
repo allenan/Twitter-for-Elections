@@ -47,5 +47,5 @@ if(mysql_num_rows($paul)) {
     }
 }
 
-echo json_encode(array('data'=>$data));
+echo json_encode(array('results'=>$data));
 ?>

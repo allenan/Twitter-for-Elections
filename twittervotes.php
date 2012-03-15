@@ -123,7 +123,8 @@ if(mysql_num_rows($query)) {
         </div><!--/span-->
           <script type="text/javascript">
                 $(function(){
-                  d = [{data:[]}];
+                  var plotData = [{data:[]}];
+
             	    var css_selector = "#placeholder";
                   var dataurl="fetchdata.php";
                   var options = {
@@ -137,27 +138,16 @@ if(mysql_num_rows($query)) {
     				      };
 
                   $.getJSON('fetchdata.php', {},  
-                    function(data) {
-                      var index = 1;
-                      $.each(data, function(i, s) {
-                        d.data.push(
-                          [index,data.count]
-                        );
-                        index += 1;
-                        //console.log(s);
+                    function(results) {
+                      //console.log(data);
+                      $.each(results.results, function(i, s) {
+                        plotData[0].data.push(
+                          [i+1,parseInt(s.count)]
+                        );  
                       });
+                      $.plot($(css_selector), plotData, options);
                     });
-                	   
-                  	/*var raw_data=$.ajax({
-                      url: dataurl,
-                      method: 'GET',
-                      dataType: 'json',
-                      success: function(){for (var i in raw_data){data.push([(i + 1), parseInt(raw_data[i]['count'])]);}}
-                  	})['data'];*/
 
-                    //var data=[{data:[[1,804],[2, 703], [3, 1869], [4, 1441]]}];
-
-                  	$.plot($(css_selector), d, options);
               	});
               
           </script>
