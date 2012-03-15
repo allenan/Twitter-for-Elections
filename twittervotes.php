@@ -146,6 +146,7 @@ if(mysql_num_rows($query)) {
                         index += 1;
                         //console.log(s);
                       });
+                    });
                 	   
                   	/*var raw_data=$.ajax({
                       url: dataurl,
@@ -156,7 +157,7 @@ if(mysql_num_rows($query)) {
 
                     //var data=[{data:[[1,804],[2, 703], [3, 1869], [4, 1441]]}];
 
-                  	$.plot($(css_selector), d, options)
+                  	$.plot($(css_selector), d, options);
               	});
               
           </script>
