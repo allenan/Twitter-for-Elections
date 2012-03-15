@@ -17,6 +17,42 @@
         padding: 9px 0;
       }
     </style>
+     <style>
+/*      body{
+        padding:0;
+        margin:0;
+        font: .8em Verdana, Arial, Tahoma, sans-serif;
+      }*/
+      #map{
+        height:500px;
+        width:100%;
+      }
+      #map-container {
+        padding: 6px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #ccc #ccc #999 #ccc;
+        -webkit-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px;
+        -moz-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px;
+        box-shadow: rgba(64, 64, 64, 0.1) 0 2px 5px;
+        width: 98%;
+      }
+      .map-compact{
+        max-width:700px;
+        max-height:500px;
+        border: 2px solid #ccc;
+      }
+      .map-container-compact{
+        max-width:705px;
+      }
+    #dashboard-container div{
+    float:left;
+    }
+    .mkr-desc p{
+    margin-top:0;
+    margin-bottom:0;
+    }
+    </style>
     
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -34,31 +70,107 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
     <script type="text/javascript" src="markerclusterer.min.js"></script>
     <script type="text/javascript" src="jquery.ui.maps.js"></script>
-    <script>
-      $(function() {
-        $('#map_canvas').gmap({'zoom': 2, 'disableDefaultUI':true}).bind('init', function(evt, map) { 
-          var bounds = map.getBounds();
-          var southWest = bounds.getSouthWest();
-          var northEast = bounds.getNorthEast();
-          var lngSpan = northEast.lng() - southWest.lng();
-          var latSpan = northEast.lat() - southWest.lat();
-          for ( var i = 0; i < 1000; i++ ) {
-            var lat = southWest.lat() + latSpan * Math.random();
-            var lng = southWest.lng() + lngSpan * Math.random();
-            $('#map_canvas').gmap('addMarker', { 
-              'position': new google.maps.LatLng(lat, lng) 
-            }).click(function() {
-              $('#map_canvas').gmap('openInfoWindow', { content : 'Hello world!' }, this);
-            });
-          }
-          $('#map_canvas').gmap('set', 'MarkerClusterer', new MarkerClusterer(map, $(this).gmap('get', 'markers')));
-          // To call methods in MarkerClusterer simply call 
-          // $('#map_canvas').gmap('get', 'MarkerClusterer').callingSomeMethod();
-        });
-      });
-      
+    <script type="text/javascript">
+      var map;
+      var markers = [];
+      var infowindow = new google.maps.InfoWindow();
+    var markerCluster = null;
+  
 
+      function initialize() {
+        geocoder = new google.maps.Geocoder();
+        var center = new google.maps.LatLng(41,-98);
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: center,
+          maxZoom: 10,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+
+    
+        markMultiple();
+      }
+
+      function markMultiple(){
+    //markers = [];
+    //console.log(eventType.serialize());
+    if (markerCluster != null) {
+      markerCluster.clearMarkers();
+      markers = [];
+    };
+        $.getJSON('fetchmapdata.php', 
+    {
+    }, 
+    function(data) {
+      $.each(data.markers, function(i, obj) {
+        console.log(obj);
+        var latLng =  new google.maps.LatLng(obj.lat,obj.lng);
+        html = "<span class='mkr-desc'><p>User: "+obj.user+"</p>"+
+        "<p>Date: "+obj.date+"</p>"+
+        "<p>Text: "+obj.text+"</p></span>";
+        var content = html;
+        //console.log(obj);
+        //var iconUrl = "img/"+obj.event_class.toLowerCase()+"-marker.png";
+        markMap(latLng, content);
+      });
+      markerCluster = new MarkerClusterer(map, markers);
+    $('#stat-ttl-evt').text(markerCluster.markers_.length);
+    $('#stat-avg-evt').text(Math.round((markerCluster.markers_.length/365)*100)/100);
+        });    
+      }
+
+      function markMap(position, content){
+        //var markericon = new google.maps.MarkerImage({url:"img/fire-marker.png", size:{width:25,height:34}, anchor:{x:9,y:34}});
+        var marker = new google.maps.Marker({
+          //icon: iconUrl,
+          position: position
+        });
+        google.maps.event.addListener(marker, 'click', function() {
+          if (map.zoom < map.maxZoom) {
+            infowindow.setContent(content);
+              infowindow.open(map, marker);
+          }
+          else{
+            console.log("find some way to show clustered markers");
+          };
+          
+        });
+
+        markers.push(marker);
+      }
+    
+    // Removes the overlays from the map, but keeps them in the array
+    function clearOverlays() {
+      if (markers) {
+        for (i in markers) {
+          markers[i].setMap(null);
+        }
+      }
+    }
+
+    // Shows any overlays currently in the array
+    function showOverlays() {
+      if (markers) {
+        for (i in markers) {
+          markers[i].setMap(map);
+        }
+      }
+    }
+
+    // Deletes all markers in the array by removing references to them
+    function deleteOverlays() {
+      if (markers) {
+        for (i in markers) {
+          markers[i].setMap(null);
+        }
+        markers.length = 0;
+      }
+    }
+
+      google.maps.event.addDomListener(window, 'load', initialize);
     </script>
+
   </head>
 
   <body>
@@ -105,8 +217,11 @@
           </div><!--/.well -->
         </div><!--/span-->
         <div class="span9">
+          <div id="map-container">
+            <div id="map"></div>
+            </div>
 
-          <div id="map_canvas" class="well" style="height:500px;">
+          <!-- <div id="map_canvas" class="well" style="height:500px;"> -->
           </div>
         </div><!--/span-->
       </div><!--/row-->
