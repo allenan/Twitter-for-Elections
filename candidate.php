@@ -3,11 +3,11 @@
 //$candidate = "Romney";
 $candidate = $_GET['candidate'];
 
-$link = mysql_connect('localhost', 'root', 'whosthat');
+$link = mysql_connect('localhost', 'nonagon_twitter', 'Twitter321!');
 if (!$link) {
     die('Could not connect: ' . mysql_error());
 }
-mysql_select_db('twitter',$link) or die('Cannot select the DB');
+mysql_select_db('nonagon_twitter-votes',$link) or die('Cannot select the DB');
 
 $query = mysql_query('SELECT * FROM `nlp2` WHERE text LIKE "%' . $candidate. '%" LIMIT 30');
 if (!$query) {
