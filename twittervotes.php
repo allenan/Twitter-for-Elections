@@ -116,7 +116,9 @@ if(mysql_num_rows($query)) {
         </div>
           	<p><a class="btn" href="#" onclick="">More Tweets</a></p>
           </div>
-          <div id="placeholder" style="float: right; width: 360px; height: 300px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; position: relative; "></div>
+          	<div><h2>the number of mentions by candidate</h2>
+          		<div id="placeholder" style="float: right; width: 360px; height: 300px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; position: relative; "></div>
+        	</div>
         </div><!--/row-->
         </div><!--/span-->
           <script type="text/javascript">
